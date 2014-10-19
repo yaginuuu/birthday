@@ -1,3 +1,3 @@
 ## setup
-cd birthday
+cd birthday  
 ruby birthday.rb
