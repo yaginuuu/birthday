@@ -8,7 +8,7 @@ def kill(cmd)
   pid = spawn(cmd, :pgroup => true)  # :pgroup => trueを追加
   thr = Process.detach(pid)
   begin
-    Timeout.timeout(5) do
+    Timeout.timeout(2) do
       thr.join
     end
   rescue Timeout::Error
