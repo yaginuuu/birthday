@@ -1,14 +1,14 @@
 require "timeout"
 
 hoshi = "sh hoshi.sh"
-beer = "sh beer.sh"
+ryohei = "sh beer.sh"
 msg = "say 'なかじー先生！お誕生日おめでとう！'"
 
 def kill(cmd)
   pid = spawn(cmd, :pgroup => true)  # :pgroup => trueを追加
   thr = Process.detach(pid)
   begin
-    Timeout.timeout(2) do
+    Timeout.timeout(4) do
       thr.join
     end
   rescue Timeout::Error
@@ -18,7 +18,7 @@ def kill(cmd)
 end
 
 kill(hoshi)
-kill(beer)
+kill(ryohei)
 
 system("say '25歳ですね'")
 puts "\n"
