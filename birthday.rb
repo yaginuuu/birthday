@@ -1,13 +1,11 @@
 # coding: utf-8
 
 require "timeout"
-
-makishima = "sh makishima.sh"
-yudai = "sh beer.sh"
-msg = "say 'まきしま先生！お誕生日おめでとう！'"
+msg1 = 'まきしま先生！お誕生日おめでとう！'
+msg2 = '25歳ですね。お誕生日おめでとう！'
 
 def kill(cmd)
-  pid = spawn(cmd, :pgroup => true)  # :pgroup => trueを追加
+  pid = spawn(cmd, :pgroup => true)
   thr = Process.detach(pid)
   begin
     Timeout.timeout(4) do
@@ -15,21 +13,19 @@ def kill(cmd)
     end
   rescue Timeout::Error
     puts "execution expired"
-    Process.kill(:TERM, -pid)        # -pidに変更
+    Process.kill(:TERM, -pid)
   end
 end
+
+makishima, yudai = "sh ./sh/hoshi.sh", "sh ./sh/beer.sh"
 
 kill(makishima)
 kill(yudai)
 
-system("say '25歳ですね。お誕生日おめでとう！'")
-puts "\n"
-puts "\n"
-puts "\n"
-puts "\n"
-puts "\n"
-puts "\n"
-puts "\n"
+system("say #{msg1}")
+10.times do
+  puts "\n"
+end
 puts "┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈☆☆☆☆☆☆☆☆☆┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
       ┈┈┈┈┈┈┈┈┈┈╭┻┻┻┻┻┻┻┻┻╮┈┈┈┈┈┈┈┈┈┈
       ┈┈┈┈┈┈┈┈┈┈┃╱╲╱╲╱╲╱╲╱┃┈┈┈┈┈┈┈┈┈┈
@@ -38,5 +34,4 @@ puts "┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈☆☆☆☆☆☆☆�
       ┈┈┈┈┈┈┈┈┈┗━━━━━━━━━━━┛┈┈┈┈┈┈┈┈┈
       ┈┈┈┈┈┈┈┈HAPPY BIRTHDAY!┈┈┈┈┈┈┈┈
       ┈┈┈┈┈┈┈┈@makimaki => 25age!┈┈┈┈┈┈"
-
-system(msg)
+system("say #{msg2}")
